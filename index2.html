@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flowchart Hitung Nilai Mutlak</title>
+
+  <!-- Mermaid -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0c10;
+      color: white;
+      padding: 20px;
+    }
+    .box {
+      background: #1f2833;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+    input, button {
+      font-size: 1rem;
+      padding: 6px 8px;
+      margin-top: 5px;
+    }
+    pre {
+      background: #222;
+      color: #66fcf1;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🧩 Flowchart Program: Hitung Nilai Mutlak Selisih</h2>
+
+  <div class="mermaid">
+flowchart TD
+    A([Mulai])
+    B[/Input a, b, c, d/]
+    C["Hitung selisih1 = a - c"]
+    D["Hitung selisih2 = b - d"]
+    E["Ambil nilai mutlak dari selisih1 dan selisih2"]
+    F["hasil = abs(selisih1) + abs(selisih2)"]
+    G[/Tampilkan hasil/]
+    H([Selesai])
+
+    A --> B --> C --> D --> E --> F --> G --> H
+  </div>
+
+  <div class="box">
+    <h3>💻 Implementasi Program di Web</h3>
+    <p>Masukkan empat angka (a b c d):</p>
+    <input id="inputAngka" type="text" placeholder="contoh: 1 2 3 4" size="30">
+    <button onclick="jalankanProgram()">Hitung</button>
+
+    <h4>Hasil:</h4>
+    <pre id="output"></pre>
+  </div>
+
+  <script>
+    function hitung(nilai1, nilai2) {
+      return nilai1 - nilai2;
+    }
+
+    function mutlak(angka) {
+      return Math.abs(angka);
+    }
+
+    function jalankanProgram() {
+      const input = document.getElementById("inputAngka").value.trim();
+      const angka = input.split(" ").map(Number);
+
+      if (angka.length !== 4 || angka.some(isNaN)) {
+        document.getElementById("output").textContent = 
+          "⚠️ Masukkan empat angka dipisah spasi, contoh: 1 2 3 4";
+        return;
+      }
+
+      const [a, b, c, d] = angka;
+      const hasil = mutlak(hitung(a, c)) + mutlak(hitung(b, d));
+
+      document.getElementById("output").textContent =
+        `Input: ${a} ${b} ${c} ${d}\nHasil: ${hasil}`;
+    }
+  </script>
+</body>
+</html>
